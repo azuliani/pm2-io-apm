@@ -180,6 +180,10 @@ export class NotifyFeature implements Feature {
     if (ServiceManager.get('transport')) {
       ServiceManager.get('transport').send('process:exception', payload)
     }
+
+    if (process.listeners('uncaughtRejection').length === 1) { // if it's only us, exit
+      process.exit(1)
+    }
   }
 
   private catchAll (): Boolean | void {
