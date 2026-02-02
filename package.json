@@ -6,7 +6,10 @@
   "typings": "build/main/index.d.ts",
   "types": "build/main/index.d.ts",
   "module": "build/module/index.js",
-  "repository": "https://github.com/azuliani/pm2-io-apm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azuliani/pm2-io-apm.git"
+  },
   "author": {
     "name": "PM2.io tech team",
     "email": "tech@pm2.io",
