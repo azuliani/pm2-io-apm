@@ -8,6 +8,27 @@
 <br/>
 </div>
 
+## About this fork (@azuliani/pm2-io)
+
+This is a fork of [@pm2/io](https://github.com/keymetrics/pm2-io-apm) that **restarts processes on unhandled promise rejections**, just like PM2 does for uncaught exceptions.
+
+By default, PM2 restarts your process when an uncaught exception occurs, but **not** when an unhandled promise rejection occurs. This inconsistency can lead to stuck processes. This fork adds `process.exit(1)` to the `onUnhandledRejection` handler, ensuring your process restarts and recovers automatically.
+
+### The change
+
+In `src/features/notify.ts`, the `onUnhandledRejection` method now calls `process.exit(1)` (matching the behavior of `onUncaughtException`):
+
+```typescript
+if (process.listeners('unhandledRejection').length === 1) { // if it's only us, exit
+  process.exit(1)
+}
+```
+
+### Installation
+
+This package is published as `@azuliani/pm2-io` and is used by [`@azuliani/pm2`](https://github.com/azuliani/pm2).
+
+---
 
 The [@pm2/io](https://github.com/keymetrics/pm2-io-apm/tree/master/test) module comes along with PM2. It is the PM2 library responsible for gathering the metrics, reporting exceptions, exposing remote actions and every interaction with your application.
 
